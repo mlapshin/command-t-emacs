@@ -4,4 +4,4 @@
 
 Install compiled binary somewhere in $PATH (optional)
 
-    $ sudo cp ./ctmake /usr/local/bin/ctmake
+    $ sudo cp ./ctmatch /usr/local/bin/ctmatch
