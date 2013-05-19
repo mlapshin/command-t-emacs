@@ -22,18 +22,15 @@ int matchresult_comp_func(const void *a, const void *b) {
     return score_a < score_b ? +1 : -1; // sort in reverse order
 }
 
-int main(int argc, char ** argv) {
+void match_stdin(char *abbrev) {
   char   *line             = 0;
   size_t  read             = 0;
   size_t  max_line_len     = 0;
   size_t  current_line_len = 0;
-  char   *abbrev           = argv[1];
 
   size_t         results_buf_len = 2000;
   matchresult_t *results_buf     = malloc(results_buf_len * sizeof(matchresult_t));
   size_t         results_count   = 0;
-
-  printf("Search pattern: %s %d\n", abbrev, argc);
 
   while ((read = getline(&line, &current_line_len, stdin)) != -1) {
     matchinfo_t matchinfo = {
@@ -86,6 +83,19 @@ int main(int argc, char ** argv) {
     free(results_buf[i].line);
 
   free(results_buf);
+}
 
-  exit(EXIT_SUCCESS);
+int main(int argc, char ** argv) {
+  if (argc != 2) {
+    fprintf(stderr, "ctmatch: wrong number of arguments\n");
+    printf("Usage: ctmatch ABBREV\n\n");
+    printf("Matches each line of STDIN with passed ABBREV string using TextMate-like Command-T algorithm.\n"
+           "Prints match results ordered by match score, higher scores first.\n");
+
+    exit(EXIT_FAILURE);
+  } else {
+    match_stdin(argv[1]);
+
+    exit(EXIT_SUCCESS);
+  }
 }
