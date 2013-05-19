@@ -19,7 +19,7 @@ int matchresult_comp_func(const void *a, const void *b) {
   if (score_a == score_b)
     return 0;
   else
-    return score_a < score_b ? +1 : -1; /* sort in reverse order */
+    return score_a < score_b ? +1 : -1; // sort in reverse order
 }
 
 int main(int argc, char ** argv) {
@@ -33,7 +33,7 @@ int main(int argc, char ** argv) {
   matchresult_t *results_buf     = malloc(results_buf_len * sizeof(matchresult_t));
   size_t         results_count   = 0;
 
-  printf("Search pattern: %s\n", abbrev);
+  printf("Search pattern: %s %d\n", abbrev, argc);
 
   while ((read = getline(&line, &current_line_len, stdin)) != -1) {
     matchinfo_t matchinfo = {
