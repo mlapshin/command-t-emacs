@@ -28,7 +28,7 @@ void match_stdin(char *abbrev) {
   size_t  max_line_len     = 0;
   size_t  current_line_len = 0;
 
-  size_t         results_buf_len = 2000;
+  size_t         results_buf_len = 200;
   matchresult_t *results_buf     = malloc(results_buf_len * sizeof(matchresult_t));
   size_t         results_count   = 0;
 
@@ -56,8 +56,9 @@ void match_stdin(char *abbrev) {
     score = recursive_match(&matchinfo, 0, 0, 0, 0.0);
 
     // realloc results_buf if needed
-    if (results_buf_len == results_count)
-      results_buf = realloc(results_buf, (results_buf_len *= 2));
+    if (results_buf_len == results_count) {
+      results_buf = realloc(results_buf, (results_buf_len *= 2) * sizeof(matchresult_t));
+    }
 
     // make copy of line
     line_copy = malloc(read + 1);
