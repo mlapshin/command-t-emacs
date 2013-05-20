@@ -53,21 +53,25 @@ void match_stdin(char *abbrev) {
     // next iteration of while will reuse line buffer
     current_line_len = max_line_len;
 
+    // do match
     score = recursive_match(&matchinfo, 0, 0, 0, 0.0);
 
-    // realloc results_buf if needed
-    if (results_buf_len == results_count) {
-      results_buf = realloc(results_buf, (results_buf_len *= 2) * sizeof(matchresult_t));
+    // record result only if score is higher than 0
+    if (score > 0.0) {
+      // realloc results_buf if needed
+      if (results_buf_len == results_count) {
+        results_buf = realloc(results_buf, (results_buf_len *= 2) * sizeof(matchresult_t));
+      }
+
+      // make copy of line
+      line_copy = malloc(read + 1);
+      memcpy(line_copy, line, read + 1);
+
+      // add result to results_buf
+      results_buf[results_count].line = line_copy;
+      results_buf[results_count].score = score;
+      results_count++;
     }
-
-    // make copy of line
-    line_copy = malloc(read + 1);
-    memcpy(line_copy, line, read + 1);
-
-    // add result to results_buf
-    results_buf[results_count].line = line_copy;
-    results_buf[results_count].score = score;
-    results_count++;
   }
 
   // Sorting results
