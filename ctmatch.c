@@ -28,7 +28,7 @@ void match_stdin(char *abbrev) {
   size_t  max_line_len     = 0;
   size_t  current_line_len = 0;
 
-  size_t         results_buf_len = 200;
+  size_t         results_buf_len = 10000;
   matchresult_t *results_buf     = malloc(results_buf_len * sizeof(matchresult_t));
   size_t         results_count   = 0;
 
