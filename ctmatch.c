@@ -38,7 +38,7 @@ void match_stdin(char *abbrev) {
       strlen(line),
       abbrev,
       strlen(abbrev),
-      1.0, 0, 0, 1
+      1.0, 0, 1, 0
     };
     double  score     = 0;
     char   *line_copy = 0;
