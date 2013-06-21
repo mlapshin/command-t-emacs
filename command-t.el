@@ -5,7 +5,7 @@
 ;; Author: Mikhail Lapshin <mikhail.a.lapshin@gmail.com>
 ;; Git: git@github.com:mlapshin/command-t-emacs.git
 ;; Keywords: project, convenience
-;; Version: 0.0.1beta
+;; Version: 0.0.1
 ;; Package-Requires: ((find-file-in-project "3.2") (popwin "0.4"))
 
 ;; This file is NOT part of GNU Emacs.
@@ -244,6 +244,7 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 
       (setq show-trailing-whitespace nil))))
 
+;;;###autoload
 (defun command-t-find-file (&optional arg)
   "Finds file using fuzzy matching."
   (interactive "p")
